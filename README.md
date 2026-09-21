@@ -277,6 +277,22 @@ Navigate to:
 
 ---
 
+## 🌐 Deploying to Render (Free Cloud Hosting)
+
+SecureForensics includes full out-of-the-box support for hosting on [Render](https://render.com) using the included `render.yaml` Blueprint.
+
+### 1-Click Blueprint Deploy
+1. Go to your [Render Dashboard](https://dashboard.render.com/) &rarr; Click **New +** &rarr; **Blueprint**.
+2. Connect your GitHub repository: **`SAYALI8106/SIH_2026`**.
+3. Render automatically configures both services:
+   - **`secureforensics-backend`**: FastAPI Python Web Service (`backend/`)
+   - **`secureforensics-frontend`**: React + Vite Static Site (`frontend/`)
+4. Click **Apply** to deploy both services live on the web!
+
+For manual step-by-step instructions and environment variable settings, refer to the [DEPLOY_RENDER.md](DEPLOY_RENDER.md) guide.
+
+---
+
 ## 🎬 End-to-End Demo Walkthrough
 
 Follow this scripted flow for presentations or hackathon evaluations:
