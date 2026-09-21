@@ -1,13 +1,26 @@
 const rawBase = import.meta.env.VITE_API_BASE_URL || '/api';
 let cleanBase = rawBase.trim();
+
 if (cleanBase.startsWith('http://') || cleanBase.startsWith('https://')) {
-  if (!cleanBase.endsWith('/api')) {
+  try {
+    const urlObj = new URL(cleanBase);
+    if (!urlObj.pathname.endsWith('/api')) {
+      cleanBase = `${cleanBase.replace(/\/+$/, '')}/api`;
+    }
+  } catch {
     cleanBase = `${cleanBase.replace(/\/+$/, '')}/api`;
   }
-} else if (cleanBase !== '/api' && !cleanBase.startsWith('/')) {
-  cleanBase = `https://${cleanBase.replace(/\/+$/, '')}/api`;
+} else if (cleanBase === '/api' || cleanBase.startsWith('/')) {
+  cleanBase = cleanBase.replace(/\/+$/, '');
+} else {
+  let host = cleanBase.replace(/\/+$/, '').replace(/\/api$/, '');
+  if (!host.includes('.')) {
+    host = `${host}.onrender.com`;
+  }
+  cleanBase = `https://${host}/api`;
 }
 const BASE_URL = cleanBase;
+
 
 
 async function handleResponse(res) {

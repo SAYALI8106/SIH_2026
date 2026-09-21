@@ -32,4 +32,5 @@ services:
         fromService:
           type: web
           name: secureforensics-backend
-          property: host
+          property: url
+
