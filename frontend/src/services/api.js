@@ -1,4 +1,14 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+const rawBase = import.meta.env.VITE_API_BASE_URL || '/api';
+let cleanBase = rawBase.trim();
+if (cleanBase.startsWith('http://') || cleanBase.startsWith('https://')) {
+  if (!cleanBase.endsWith('/api')) {
+    cleanBase = `${cleanBase.replace(/\/+$/, '')}/api`;
+  }
+} else if (cleanBase !== '/api' && !cleanBase.startsWith('/')) {
+  cleanBase = `https://${cleanBase.replace(/\/+$/, '')}/api`;
+}
+const BASE_URL = cleanBase;
+
 
 async function handleResponse(res) {
   if (!res.ok) {

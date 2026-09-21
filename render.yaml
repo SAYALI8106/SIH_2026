@@ -20,8 +20,6 @@ services:
   - type: web
     name: secureforensics-frontend
     env: static
-    region: oregon
-    plan: free
     rootDir: frontend
     buildCommand: "npm install && npm run build"
     staticPublishPath: dist
@@ -35,4 +33,3 @@ services:
           type: web
           name: secureforensics-backend
           property: host
-          value: https://${secureforensics-backend.host}/api
